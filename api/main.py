@@ -17,6 +17,7 @@ extractor = FeatureExtractor()
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse(
+        request,
         "index.html",
         {
             "request": request,
@@ -40,6 +41,7 @@ async def predict_ui(
         result = predict(features, model_type=model_type)
 
         return templates.TemplateResponse(
+            request,
             "index.html",
             {
                 "request": request,
@@ -50,6 +52,7 @@ async def predict_ui(
 
     except Exception as e:
         return templates.TemplateResponse(
+            request,
             "index.html",
             {
                 "request": request,
